@@ -15,6 +15,7 @@ from modules.discriminator import MultiScaleDiscriminator
 from modules.keypoint_detector import KPDetector, HEEstimator
 
 import torch
+import warnings
 
 from train import train
 
@@ -22,7 +23,9 @@ if __name__ == "__main__":
     
     if sys.version_info[0] < 3:
         raise Exception("You must use Python 3 or higher. Recommended version is Python 3.7")
-
+        
+    warnings.filterwarnings("ignore", category=UserWarning)
+    
     parser = ArgumentParser()
     parser.add_argument("--config", default="config/vox-256.yaml", help="path to config")
     parser.add_argument("--mode", default="train", choices=["train",])
