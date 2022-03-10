@@ -231,6 +231,7 @@ def find_best_frame(source, driving, cpu=False):
     for i, image in tqdm(enumerate(driving)):
         landmark = fa.get_landmarks(255 * image)
         if landmark is None:
+            print(f'Face not detected in frame {i} - Skipped')
             continue
         kp_driving = landmark[0]
         kp_driving = normalize_kp(kp_driving)
