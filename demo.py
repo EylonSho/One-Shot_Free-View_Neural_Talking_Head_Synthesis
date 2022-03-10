@@ -229,7 +229,10 @@ def find_best_frame(source, driving, cpu=False):
     norm  = float('inf')
     frame_num = 0
     for i, image in tqdm(enumerate(driving)):
-        kp_driving = fa.get_landmarks(255 * image)[0]
+        landmark = fa.get_landmarks(255 * image)
+        if landmark is None:
+            continue
+        kp_driving = landmark[0]
         kp_driving = normalize_kp(kp_driving)
         new_norm = (np.abs(kp_source - kp_driving) ** 2).sum()
         if new_norm < norm:
